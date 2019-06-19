@@ -1019,7 +1019,7 @@ func (r *RedisClient) CollectWorkersStats(sWindow, lWindow time.Duration, login 
 	dorew = append(dorew, &SumRewardData{ Name: "12 часов", Interval: 3600 * 12, Offset: 0 })
 	dorew = append(dorew, &SumRewardData{ Name: "24 часа", Interval: 3600 * 24, Offset: 0 })
 	dorew = append(dorew, &SumRewardData{ Name: "7 дней", Interval: 3600 * 24 * 7, Offset: 0 })
-	dorew = append(dorew, &SumRewardData{ Name: "месяц", Interval: 3600 * 24 * 30, Offset: 0 })
+	dorew = append(dorew, &SumRewardData{ Name: "30 дней", Interval: 3600 * 24 * 30, Offset: 0 })
 
 	for _, reward := range rewards {
 
