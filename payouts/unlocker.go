@@ -34,7 +34,7 @@ const byzantiumHardForkHeight = 1000000
 
 
 var homesteadReward = math.MustParseBig256("7000000000000000000")
-var byzantiumReward = math.MustParseBig256("6000000000000000000")
+var byzantiumReward = math.MustParseBig256("4000000000000000000")
 // Donate 10% from pool fees to developers
 const donationFee = 10.0
 const donationAccount = "0xb85150eb365e7df0941f0cf08235f987ba91506a"
