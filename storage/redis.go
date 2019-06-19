@@ -1015,7 +1015,6 @@ func (r *RedisClient) CollectWorkersStats(sWindow, lWindow time.Duration, login 
 	rewards := convertRewardResults(cmds[4].(*redis.ZSliceCmd)) // all
 
 	var dorew []*SumRewardData
-	dorew = append(dorew, &SumRewardData{ Name: "30 минут", Interval: 1800, Offset: 0 })
 	dorew = append(dorew, &SumRewardData{ Name: "60 минут", Interval: 3600, Offset: 0 })
 	dorew = append(dorew, &SumRewardData{ Name: "12 часов", Interval: 3600 * 12, Offset: 0 })
 	dorew = append(dorew, &SumRewardData{ Name: "24 часа", Interval: 3600 * 24, Offset: 0 })
