@@ -12,6 +12,7 @@ import (
 	"github.com/slavserver/pool/util"
 )
 
+
 type Config struct {
 	Endpoint string `json:"endpoint"`
 	Password string `json:"password"`
