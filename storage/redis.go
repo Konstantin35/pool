@@ -56,7 +56,7 @@ type RewardData struct {
         Immature       bool     `json:"immature"`
 }
 type BlockData struct {
-	Login	       string   `json:"login"`
+	Finder         string   `json:"finder"`
 
 	Height         int64    `json:"height"`
 	Timestamp      int64    `json:"timestamp"`
@@ -96,7 +96,7 @@ func (b *BlockData) RoundKey() string {
 }
 
 func (b *BlockData) key() string {
-	return join(b.UncleHeight, b.Orphan, b.Nonce, b.serializeHash(), b.Timestamp, b.Difficulty, b.TotalShares, b.Reward, b.Login)
+	return join(b.UncleHeight, b.Orphan, b.Nonce, b.serializeHash(), b.Timestamp, b.Difficulty, b.TotalShares, b.Reward, b.Finder)
 
 }
 
@@ -386,7 +386,9 @@ func (r *RedisClient) WriteBlock(login, id string, params []string, diff, roundD
                         totalShares += n
                 }
 		hashHex := strings.Join(params, ":")
-		s := join(hashHex, ts, roundDiff, totalShares, login)
+		
+		finder := strings.ToLower(login)
+		s := join(hashHex, ts, roundDiff, totalShares, finder)
 
 		cmd := r.client.ZAdd(r.formatKey("blocks", "candidates"), redis.Z{Score: float64(height), Member: s})
 		r.client.Del(r.formatRound(int64(height), params[0]))
@@ -1103,7 +1105,7 @@ func convertCandidateResults(raw *redis.ZSliceCmd) []*BlockData {
 		block.Timestamp, _ = strconv.ParseInt(fields[3], 10, 64)
 		block.Difficulty, _ = strconv.ParseInt(fields[4], 10, 64)
 		block.TotalShares, _ = strconv.ParseInt(fields[5], 10, 64)
-		block.Login = fields[6]
+		block.Finder = fields[6]
 
 		block.candidateKey = v.Member.(string)
 		result = append(result, &block)
@@ -1153,7 +1155,7 @@ func convertBlockResults(rows ...*redis.ZSliceCmd) []*BlockData {
 			block.TotalShares, _ = strconv.ParseInt(fields[6], 10, 64)
 			block.RewardString = fields[7]
 			block.ImmatureReward = fields[7]
-			block.Login = fields[8]
+			block.Finder = fields[8]
 
 			block.immatureKey = v.Member.(string)
 			result = append(result, &block)
