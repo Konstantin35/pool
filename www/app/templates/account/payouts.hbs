@@ -1,0 +1,33 @@
+
+<div class="alert ">
+
+ <div class="alert index_block2 table-responsive">
+
+  {{#if model.payments}}
+
+
+    <table class="table table-condensed table-striped">
+  <thead style="color:#000; background-color:rgba(0, 0, 0, 0.13);">
+        <tr>
+          <th>Время выплаты</th>
+          <th>Tx ID</th>
+          <th>Сумма</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model.payments as |tx|}}
+          <tr>
+            <td>{{format-date-locale tx.timestamp}}</td>
+            <td>
+              <a href="https://meta.nilu.tech/transaction/{{tx.tx}}" class="hash" rel="nofollow" target="_blank" style="color:#000">{{tx.tx}}</a>
+            </td>
+            <td>{{format-balance tx.amount}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+  {{else}}
+  <h3>Выплат еще не было</h3>
+  {{/if}}
+</div></div>
