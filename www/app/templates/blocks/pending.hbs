@@ -1,0 +1,42 @@
+{{#if model.candidates}}
+
+<table class="table table-condensed table-striped">
+  <thead style="color:#000; background-color:rgba(0, 0, 0, 0.13);">
+    <tr>
+      <th>Высота Блока</th>
+      
+<th>Майнер</th>
+<th>Время Решения</th>
+      <th>Удача Пула</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model.candidates as |block|}}
+    <tr>
+     
+
+
+
+ <td><a style="color:#000" href="https://meta.nilu.tech/block/{{block.height}}" rel="nofollow" target="_blank">{{format-number block.height}}</a></td>
+
+
+
+
+
+<td><a href="/#/account/{{block.finder}}" class="hash">{{block.finder}}</a></td>        
+<td>{{format-date-locale block.timestamp}}&nbsp;</td>
+
+      <td>
+        {{#if block.isLucky}}
+        <span class="label label-success">{{format-number block.variance style='percent'}}</span>
+        {{else}}
+        <span class="label label-info">{{format-number block.variance style='percent'}}</span>
+        {{/if}}
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+
+{{/if}}

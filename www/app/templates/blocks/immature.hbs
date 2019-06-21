@@ -1,0 +1,23 @@
+{{#if model.immature}}
+
+<table class="table table-condensed table-striped">
+  <thead style="color:#000; background-color:rgba(0, 0, 0, 0.13);">
+    <tr>
+      <th>Высота Блока</th>
+            
+
+<th>Майнер</th>
+<th>Время Решения</th>
+      <th>Удача Пула</th>
+      <th>Награда</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model.immature as |block|}}
+      {{partial "blocks/block"}}
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+
+{{/if}}
