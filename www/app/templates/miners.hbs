@@ -1,0 +1,67 @@
+
+  
+<div class="container">
+<div class="alert panel_1">
+
+
+
+
+
+
+
+
+    <p class="lead">Хешрейт Пула: {{format-hashrate model.hashrate}}</p>
+    <strong>Всего майнеров:</strong> <span class="label label-info">{{model.minersTotal}}</span>
+ <div class="alert index_block2">
+<div class="table-responsive">
+
+
+
+
+
+  {{#if model.miners}}
+
+
+  <table class="table table-striped table-condensed">
+
+  <thead style="color:#000; background-color:rgba(0, 0, 0, 0.13);">
+      <tr>
+        <th>Майнер</th>
+        <th>Хешрейт</th>
+        <th>Последняя шара</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#each model.miners as |m|}}
+      <tr class="{{if m.offline "warning"}}">
+      <td> {{#link-to 'account' m.login class='hash' }}{{m.login}}{{/link-to}}</td>
+        <td>{{format-hashrate m.hr}}</td>
+        <td>{{format-date-locale m.lastBeat}}</td>
+
+      
+</tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{else}}
+
+  {{/if}}
+
+
+
+</div></div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+

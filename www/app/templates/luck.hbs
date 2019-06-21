@@ -1,0 +1,25 @@
+  <div class="alert index_block2">
+<table class="table table-condensed table-striped">
+
+ <thead style="color:#000; background-color:rgba(0, 0, 0, 0.13);">
+    <tr>
+      <th>Блоки</th>
+      <th>Удача Пула</th>
+      <th>Uncle </th>
+      <th>Orphan</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each-in model.luck as |total row|}}
+  <tr>
+    <td>{{total}}</td>
+    <td>{{format-number row.luck style='percent'}}</td>
+    <td>{{format-number row.uncleRate style='percent'}}</td>
+    <td>{{format-number row.orphanRate style='percent'}}</td>
+  </tr>
+  {{/each-in}}
+  </tbody>
+
+</table>
+</div>
+

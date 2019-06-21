@@ -1,0 +1,182 @@
+
+<div class="table-responsive">
+<div class="container">
+
+<div class="alert panel_1">
+
+
+
+
+
+
+
+
+<div class="row">
+<div class="col-md-4 stats">
+
+<i class="fa fa-bars"></i> <strong><a href="http://clona.ru">Список Пулов...</a></strong>
+
+<table style="width: 100%">
+	<tr>
+		<td style="width: 172px" class="style1"><strong>Выплаты</strong></td>
+		<td class="style1">от 10 мин...</td>
+	</tr>
+	<tr>
+		<td style="width: 172px" class="style1"><strong>Комиссия</strong></td>
+		<td class="style1">1%</td>
+	</tr>
+	<tr>
+		<td style="width: 172px" class="style1"><strong>Награда за блок</strong></td>
+		<td><span class="style1">4 </span><span lang="en-us" class="style1">NILU</span></td>
+	</tr>
+	<tr>
+		<td style="width: 172px" class="style1">
+		<span lang="en-us" class="style1"><strong>Uncle </strong></span>
+		<span class="style1"><strong>блок</strong></span></td>
+		<td><span class="style1">3...</span><span lang="en-us" class="style1">
+		</span></td>
+	</tr>
+</table>
+
+
+<br/>
+
+
+
+
+<table style="width: 66%">
+
+<tr>
+		<td style="width: 199px" class="style1"><span lang="en-us"><strong>Форум (<a target="_blank" href="https://forum.bits.media/index.php?/topic/34263-solo-pool-eth-etc-exp-music-dbix-ubiq-clona-network/" rel="nofollow"> RU</a>  / <a target="_blank" href="https://bitcointalk.org/index.php?topic=1631250.0" rel="nofollow">EN</a> )</strong></span></td>
+		<td class="style1"><span lang="en-us">
+		</span></td>
+	</tr>
+
+
+<tr>
+		<td style="width: 199px" class="style1"><span lang="en-us"><strong>Статистика Сети</strong></span></td>
+		<td class="style1"><span lang="en-us">
+		<a target="_blank"  href="http://clona.ru:94/" >Link</a></span></td>
+	</tr>
+
+
+	<tr>
+		<td style="width: 199px" class="style1"><span lang="en-us"><strong>Купить | Продать </strong></span></td>
+		<td><span lang="en-us" class="style1">
+		<a target="_blank" href="https://app.stex.com/en/basic-trade/pair/BTC/NILU/1D" rel="nofollow">Link</a></span></td>
+	</tr>
+
+
+
+
+	
+	<tr>
+		<td style="width: 199px"><strong>Калькулятор Майнинга</strong></td>
+		<td class="style1"><span lang="en-us" class="style1">
+		<a target="_blank" href="https://mining.alekseirubin.com/calculator/NILU" rel="nofollow">Link</a></span></td>
+	</tr>
+</table>
+</div>
+
+
+
+
+
+
+ <div class="col-md-3 stats"> 
+        <div><i class="fa fa-unlock-alt"></i> Сложность сети: <span>{{with-metric-prefix stats.difficulty}}</span></div>
+        <div><i class="fa fa-tachometer"></i> Хешрейт сети: <span>{{format-hashrate stats.hashrate}}</span></div>
+  <div><i class="fa fa-bars"></i> Решаем блок: <span>{{format-number stats.height}}</span></div>
+  <div><i class="fa fa-tachometer"></i> Хешрейт пула: <span id="poolHashrate">{{format-hashrate stats.model.hashrate}}</span></div>
+
+ 
+
+
+ <div><i class="fa fa-clock-o"></i> Удача пула: <span>{{format-number stats.roundVariance style='percent'}}</span></div>
+
+
+
+ {{#if stats.model.stats.lastBlockFound}}
+        <div><i class="fa fa-clock-o"></i> Блок: <span>{{format-relative (seconds-to-ms stats.model.stats.lastBlockFound)}}</span></div>
+     
+        {{/if}}
+</div>
+
+
+<!--
+ <div class="col-md-3 stats"> 
+<iframe src="https://clona.ru/widget/n/dbix.htm" scrolling="no" name="I1" style=" border-radius: 10px; height: 207px; width: 320px" id="I1"  border="1px" frameborder="1px"></iframe>
+</div>
+-->
+
+
+</div>
+
+
+<a href="https://nilu.clona.ru/en"><img src="https://clona.org/img/en.png"></a> <a href="https://nilu.clona.ru/"><img src="https://clona.ru/img/ru.png"></a>&nbsp;
+
+
+
+
+ <div class="alert panel_graph"> 
+
+
+{{high-charts mode=chartMode chartOptions=chartOptions content=chartData}}
+ </div>
+
+
+
+
+<div class="input-group">
+<b>
+{{input value=cachedLogin class="form-control"  placeholder="Статистика майнера: 0x.... wallet"}}
+</b>
+<span class="input-group-btn">
+<button  class="btn "{{action 'lookup' cachedLogin}}>
+<span style="display: inline;"><i class="fa fa-search"></i> поиск </span>
+</button> </span></div>
+
+
+
+
+
+
+
+<br> <br>
+
+<div class="alert panel_chat"> 
+
+<iframe src="https://www4.cbox.ws/box/?boxid=4314388&boxtag=zuj56c" scrolling="auto" name="I1" style="float: middle; border-radius: 19px;  height: 520px; width: 100%" id="I1" border="0" frameborder="0"></iframe>
+
+</div>
+
+
+
+
+<br>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

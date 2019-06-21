@@ -1,0 +1,49 @@
+
+<div class="container">
+<div class="alert panel_1">
+
+
+
+    <p class="lead">Комиссии за транзакции оплачивает пул</p>
+
+   <div class="alert index_block2">
+<div class="table-responsive">
+
+  {{#if model.payments}}
+
+  <table class="table table-condensed">
+  <thead style="color:#000; background-color:rgba(0, 0, 0, 0.13);">
+      <tr>
+        <th>Время Выплаты</th>
+        <th>Сумма</th>
+        <th>Адрес</th>
+        <th>Tx ID</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model.payments as |tx|}}
+        <tr>
+<td>{{format-date-locale tx.timestamp}}</td>
+          <td>{{format-number tx.formatAmount}}</td>
+
+          <td>
+           <a href="/#/account/{{tx.address}}" class="hash" rel="nofollow"style="color:#421010" >{{tx.address}}</a>
+          </td>
+          <td>
+            <a href="https://meta.nilu.tech/transaction/{{tx.tx}}" class="hash" rel="nofollow" target="_blank" style="color:#000">{{format-tx tx.tx}}</a>
+          </td>
+          
+
+
+
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{else}}
+
+  {{/if}}
+</div>
+</div></div></div>

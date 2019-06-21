@@ -1,0 +1,127 @@
+<div class="table-responsive">
+<div class="container">
+<div class="alert panel_1">
+
+
+
+<div class="alert panel_graph_user">
+
+
+<b><a target="_blank" href="https://meta.nilu.tech/address/{{model.login}}">
+
+<img src="https://clona.ru/img/nilu.png"> {{model.login}}</a></b>
+
+
+
+{{high-charts mode=chartMode chartOptions=chartOptions content=chartData}}
+</div>
+
+<br>
+<div class="row">
+
+<div class="col-md-4 stats">
+
+<div style="display: block;"><i class="fa fa-cubes"></i> Решено блоков: <strong><span>{{format-number model.stats.blocksFound fallback='0'}}</span></strong></div>
+
+<div style="display: block;"><i class="fa fa-cloud"></i> Неподтвержденный баланс: <span>{{format-balance model.stats.immature}}</span></div>
+
+<div style="display: block;"><i class="fa fa-bank"></i> К выплате: <span>{{format-balance model.stats.balance}}</span></div>
+
+{{#if model.stats.pending}}
+<div style="display: block;"><i class="fa fa-clock-o"></i> Выплачивается: <span>{{format-balance model.stats.pending}}</span><br>
+        </div>
+{{/if}}
+
+</div>
+
+
+
+<div class="col-md-3 stats">
+
+
+<div style="display: block;"><i class="fa fa-money"></i> <b>Выплачено:<span> {{format-balance model.stats.paid}}</span></b></div>
+{{#each model.sumrewards as |sumreward|}}
+  <tr>
+    <td>{{sumreward.name}}</td>&nbsp;
+&nbsp;
+
+<td>{{format-balance sumreward.reward}}</td>
+
+
+  </tr>
+  {{/each}}
+
+
+
+
+</div>
+
+
+<div class="col-md-4 stats">
+
+ {{#if model.stats.lastShare}}
+<div style="display: block;"><i class="fa fa-clock-o"></i>
+          Шара: <span>{{format-relative (seconds-to-ms (string-to-int model.stats.lastShare))}}</span>
+        </div>
+
+        {{/if}}
+ <div style="display: block;"><i class="fa fa-gears"></i> Работников: <span>{{format-number model.workersOnline}}</span></div>
+        <div style="display: block;"><i class="fa fa-tachometer"></i> Хешрейт (30минут): <span>{{format-hashrate model.currentHashrate}}</span></div>
+        <div style="display: block;"><i class="fa fa-tachometer"></i> Хешрейт (3часа): <span>{{format-hashrate model.hashrate}}</span></div>
+
+</div>
+
+
+
+</div>
+<br><br>
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+
+<ul class="nav nav-tabs">
+ {{#active-li currentWhen='account.chat' role='presentation'}}
+      {{#link-to 'account.chat'}}-=Чат=- <span class="badge alert-danger"></span>{{/link-to}}
+    {{/active-li}}
+  
+
+{{#active-li currentWhen='account.index' role='presentation'}}
+      {{#link-to 'account.index'}}Работники <span class="badge alert-success">{{model.workersOnline}}</span>{{/link-to}}
+    {{/active-li}}
+ {{#active-li currentWhen='account.rewards' role='presentation'}}
+      {{#link-to 'account.rewards'}}Блоки{{/link-to}}
+    {{/active-li}} 
+
+    {{#active-li currentWhen='account.payouts' role='presentation'}}
+      {{#link-to 'account.payouts'}}Выплаты{{/link-to}}
+    {{/active-li}}
+
+{{#active-li currentWhen='account.info' role='presentation'}}
+      {{#link-to 'account.info'}}Coin Info{{/link-to}}
+
+ {{/active-li}}
+
+
+  </ul>
+{{outlet}}
+
+</div>
+
+
+
+
+
+</div>
+</div>
+</div>
+
+
+
