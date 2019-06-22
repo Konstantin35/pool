@@ -8,6 +8,9 @@ import (
 	"strconv"
 	"time"
 
+	//"github.com/ethereum/go-ethereum/common"
+	
+	// Fix 0x0
 	"github.com/ethereum/go-ethereum/common/hexutil"
 
 	"github.com/slavserver/pool/rpc"
@@ -34,11 +37,15 @@ type PayoutsConfig struct {
 
 func (self PayoutsConfig) GasHex() string {
 	x := util.String2Big(self.Gas)
+
+	// Fix 0x0
 	return hexutil.EncodeBig(x)
 }
 
 func (self PayoutsConfig) GasPriceHex() string {
-	x := util.String2Big(self.Gas)
+	x := util.String2Big(self.GasPrice)
+
+	// Fix 0x0
 	return hexutil.EncodeBig(x)
 }
 
@@ -55,9 +62,8 @@ func NewPayoutsProcessor(cfg *PayoutsConfig, backend *storage.RedisClient) *Payo
 	u.rpc = rpc.NewRPCClient("PayoutsProcessor", cfg.Daemon, cfg.Timeout)
 	return u
 }
-
 func (u *PayoutsProcessor) Start() {
-	log.Println("Starting payouts")
+	log.Println("==Starting payouts==")
 
 	if u.mustResolvePayout() {
 		log.Println("Running with env RESOLVE_PAYOUT=1, now trying to resolve locked payouts")
@@ -117,18 +123,15 @@ func (u *PayoutsProcessor) process() {
 	}
 
 	for _, login := range payees {
+
 		amount, _ := u.backend.GetBalance(login)
 		amountInShannon := big.NewInt(amount)
-
-		ptresh, _ := u.backend.GetTreshold(login)
-		if(ptresh <= 10) {
-			ptresh = u.config.Threshold
-		}
 
 		// Shannon^2 = Wei
 		amountInWei := new(big.Int).Mul(amountInShannon, util.Shannon)
 
-		if !u.reachedThreshold(amountInShannon, ptresh) {
+
+		if !u.reachedThreshold(amountInShannon) {
 			continue
 		}
 		mustPay++
@@ -175,7 +178,7 @@ func (u *PayoutsProcessor) process() {
 			u.lastFail = err
 			break
 		}
-
+		// Fix 0x0
 		value := hexutil.EncodeBig(amountInWei)
 		txHash, err := u.rpc.SendTransaction(u.config.Address, login, u.config.GasHex(), u.config.GasPriceHex(), value, u.config.AutoGas)
 		if err != nil {
@@ -209,14 +212,18 @@ func (u *PayoutsProcessor) process() {
 				continue
 
 			}
+
 			// Tx has been mined
 
 			if receipt != nil && receipt.Confirmed() {
-				if receipt.Successful() {
+
+		if receipt.Successful() {
 					log.Printf("Payout tx successful for %s: %s", login, txHash)
 				} else {
-log.Printf("Payout tx failed for %s: %s. Address contract throws on incoming tx.", login, txHash)
+					log.Printf("Payout tx failed for %s: %s. Address contract throws on incoming tx.", login, txHash)
 				}
+
+
 				break
 			}
 		}
@@ -257,8 +264,8 @@ func (self PayoutsProcessor) checkPeers() bool {
 	return true
 }
 
-func (self PayoutsProcessor) reachedThreshold(amount *big.Int, threshold int64) bool {
-	return big.NewInt(threshold).Cmp(amount) < 0
+func (self PayoutsProcessor) reachedThreshold(amount *big.Int) bool {
+	return big.NewInt(self.config.Threshold).Cmp(amount) < 0
 }
 
 func formatPendingPayments(list []*storage.PendingPayment) string {
