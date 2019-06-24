@@ -364,7 +364,9 @@ func (r *RedisClient) WriteBlock(login, id string, params []string, diff, actual
 		tx.HIncrBy(r.formatKey("miners", login), "blocksFound", 1)
 				
 		tx.HSet(r.formatKey("miners", login), "rshares", strconv.FormatInt(0, 10))
-
+		tx.HSet(r.formatKey("miners", login), "lastBlockFound", strconv.FormatInt(ts, 10))
+		
+		
 		tx.HGetAllMap(r.formatKey("shares", "roundCurrent"))
 		tx.Del(r.formatKey("shares", "roundCurrent"))
 		tx.LRange(r.formatKey("lastshares"), 0, r.pplns)
