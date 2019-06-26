@@ -363,7 +363,7 @@ func (r *RedisClient) WriteBlock(login, id string, params []string, diff, actual
 		tx.ZIncrBy(r.formatKey("finders"), 1, login)
 		tx.HIncrBy(r.formatKey("miners", login), "blocksFound", 1)
 				
-		tx.HSet(r.formatKey("miners", login), "rshares", strconv.FormatInt(0, 10))
+		tx.HSet(r.formatKey("miners", login), "roundShares", strconv.FormatInt(0, 10))
 		tx.HSet(r.formatKey("miners", login), "lastBlockFound", strconv.FormatInt(ts, 10))
 		
 		
@@ -423,7 +423,7 @@ func (r *RedisClient) writeShare(tx *redis.Multi, ms, ts int64, login, id string
 	tx.LPush(r.formatKey("lastshares"), login)
 	tx.LTrim(r.formatKey("lastshares"), 0, r.pplns)
 	
-	tx.HIncrBy(r.formatKey("miners", login), "rshares", diff)
+	tx.HIncrBy(r.formatKey("miners", login), "roundShares", diff)
 
 	tx.HIncrBy(r.formatKey("shares", "roundCurrent"), login, diff)
 	tx.ZAdd(r.formatKey("hashrate"), redis.Z{Score: float64(ts), Member: join(diff, login, id, ms)})
