@@ -424,6 +424,8 @@ func (r *RedisClient) writeShare(tx *redis.Multi, ms, ts int64, login, id string
 	tx.LTrim(r.formatKey("lastshares"), 0, r.pplns)
 	
 	tx.HIncrBy(r.formatKey("miners", login), "roundShares", diff)
+	tx.HIncrBy(r.formatKey("miners", login), "totalShares", diff)
+	
 
 	tx.HIncrBy(r.formatKey("shares", "roundCurrent"), login, diff)
 	tx.ZAdd(r.formatKey("hashrate"), redis.Z{Score: float64(ts), Member: join(diff, login, id, ms)})
